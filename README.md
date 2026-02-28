@@ -22,6 +22,47 @@ Docker user targets:
 - dev
 - test
 
+### Native development on Raspbian Trixie (Node.js 20)
+
+LaserWeb4 can be built on modern Raspbian with Node.js 20.
+
+1. Install Node.js 20 and npm 10 (or newer):
+
+```sh
+node -v
+npm -v
+```
+
+Expected versions for this repo: `node >=20 <21`, `npm >=10`.
+
+2. Install dependencies and required git submodules:
+
+```sh
+npm run setup:trixie
+```
+
+3. Build the frontend:
+
+```sh
+npm run bundle-dev
+```
+
+4. Start development:
+
+```sh
+npm start
+```
+
+#### Notes for Node 20 migration
+
+- This repository includes git dependencies (`lw.comm-server`, `web-cam-cpp`, etc.).
+- `package-lock.json` should be kept up to date with Node 20 to avoid pinning legacy native module versions.
+- If you see missing `lw.machines` or `lw.materials` errors, re-run:
+
+```sh
+git submodule update --init --recursive
+```
+
 You can run the `dev` version of the app in Docker using the commands below.
 - build `dev` image:
 ```sh
