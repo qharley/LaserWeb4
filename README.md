@@ -26,28 +26,35 @@ Docker user targets:
 
 LaserWeb4 can be built on modern Raspbian with Node.js 20.
 
-1. Install Node.js 20 and npm 10 (or newer):
+1. Install Node.js 20 and npm 9 (or newer):
 
 ```sh
 node -v
 npm -v
 ```
 
-Expected versions for this repo: `node >=20 <21`, `npm >=10`.
+Expected versions for this repo: `node >=20 <21`, `npm >=9`.
 
-2. Install dependencies and required git submodules:
+2. Install native build prerequisites (required for packages like `node-hid` on ARM):
+
+```sh
+sudo apt update
+sudo apt install -y build-essential python3 make g++ pkg-config libusb-1.0-0-dev libudev-dev
+```
+
+3. Install dependencies and required git submodules:
 
 ```sh
 npm run setup:trixie
 ```
 
-3. Build the frontend:
+4. Build the frontend:
 
 ```sh
 npm run bundle-dev
 ```
 
-4. Start development:
+5. Start development:
 
 ```sh
 npm start
@@ -62,6 +69,8 @@ npm start
 ```sh
 git submodule update --init --recursive
 ```
+
+- If install fails with `libusb.h: No such file or directory` while building `node-hid`, install `libusb-1.0-0-dev` and retry `npm install`.
 
 You can run the `dev` version of the app in Docker using the commands below.
 - build `dev` image:
