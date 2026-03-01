@@ -219,6 +219,7 @@ class Settings extends React.Component {
 
                 <PanelGroup>
                     <Panel header="Machine Profiles" bsStyle="primary" collapsible defaultExpanded={true} eventKey="0">
+                        <Button bsSize="xsmall" bsStyle="danger" onClick={e => this.props.handleFactoryReset()} style={{ marginBottom: 10 }}>Reset to Bundled Defaults</Button>
                         <MachineProfile onApply={this.props.handleApplyProfile} />
                         <MaterialDatabaseButton>Launch Material Database</MaterialDatabaseButton>
                     </Panel>
