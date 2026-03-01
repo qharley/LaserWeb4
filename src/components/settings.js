@@ -10,6 +10,7 @@ import Validator from 'validatorjs';
 
 import { setSettingsAttrs, uploadSettings, downloadSettings, uploadMachineProfiles, downloadMachineProfiles, uploadSnapshot, downloadSnapshot, storeSnapshot, recoverSnapshot } from '../actions/settings';
 import { LOCALSTORAGE_KEY } from '../lib/constants';
+import { resolveBundledSettings, resolveBundledProfiles } from '../lib/bundled-settings';
 import { SETTINGS_VALIDATION_RULES, ValidateSettings } from '../reducers/settings';
 
 import MachineProfile from './machine-profiles';
@@ -392,7 +393,15 @@ const mapDispatchToProps = (dispatch) => {
         handleFactoryReset: () => {
             confirm("Reset settings and machine profiles to bundled defaults? The page will reload.", (data) => {
                 if (data) {
-                    window.localStorage.removeItem(LOCALSTORAGE_KEY);
+                    // Write bundled defaults directly into localStorage.
+                    // mergePersistedState only runs its merge callback when the payload is
+                    // truthy — removing the key leaves payload=null and the merge is skipped
+                    // entirely, so the profile list and settings would stay at Redux defaults.
+                    const resetState = {
+                        settings: resolveBundledSettings(),
+                        machineProfiles: resolveBundledProfiles()
+                    };
+                    window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(resetState));
                     window.location.reload();
                 }
             })
