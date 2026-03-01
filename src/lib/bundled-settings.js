@@ -37,20 +37,12 @@ export const buildBundledState = (state, { applySettings = false, resetProfiles 
         return { ...state, machineProfiles };
     }
 
+    // Use the bundled settings file directly as the authoritative source.
+    // Do NOT re-apply the selected profile's settings on top — the settings JSON
+    // already contains the complete desired defaults. Applying the profile again
+    // would overwrite correct values with stale embedded-profile data.
     const bundledSettings = resolveBundledSettings();
-    let settings = { ...(state.settings || {}), ...(bundledSettings || {}) };
-
-    const selectedProfileId = settings && settings.__selectedProfile;
-    const selectedProfile = selectedProfileId && machineProfiles[selectedProfileId];
-    if (selectedProfile && selectedProfile.settings) {
-        settings = { ...settings, ...selectedProfile.settings, __selectedProfile: selectedProfileId };
-    } else {
-        const defaultProfileId = resolveDefaultProfileId(machineProfiles);
-        const defaultProfile = defaultProfileId ? machineProfiles[defaultProfileId] : null;
-        if (defaultProfile && defaultProfile.settings) {
-            settings = { ...settings, ...defaultProfile.settings, __selectedProfile: defaultProfileId };
-        }
-    }
+    const settings = { ...(bundledSettings || {}) };
 
     return { ...state, machineProfiles, settings };
 };
