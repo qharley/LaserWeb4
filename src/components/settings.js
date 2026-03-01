@@ -357,6 +357,8 @@ class Settings extends React.Component {
                                 <td><ApplicationSnapshotToolbar loadButton saveButton stateKeys={['settings']} label="Settings" saveName="laserweb-settings.json" /><hr /></td></tr>
                             <tr><td><strong>Machine Profiles</strong></td>
                                 <td><ApplicationSnapshotToolbar loadButton saveButton stateKeys={['machineProfiles']} label="Machine Profiles" saveName="laserweb-profiles.json" /><hr /></td></tr>
+                            <tr><td><strong>Factory Reset</strong></td>
+                                <td><Button bsSize="xsmall" onClick={e => this.props.handleFactoryReset()} bsStyle="danger">Reset to Bundled Defaults</Button><hr /></td></tr>
                             <tr><td><strong>Macros</strong></td>
                                 <td><Button bsSize="xsmall" onClick={e => this.props.handleResetMacros()} bsStyle="warning">Reset</Button></td></tr>
                         </tbody></table>
@@ -385,6 +387,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        handleFactoryReset: () => {
+            confirm("Reset settings and machine profiles to bundled defaults?", (data) => {
+                if (data) {
+                    dispatch({ type: 'FACTORY_RESET_BUNDLED' })
+                    alert('Bundled defaults applied successfully.')
+                }
+            })
+        },
         handleResetMacros: () => {
             confirm("Are you sure?", (data) => { if (data !== null) dispatch({ type: "MACROS_RESET" }) })
 

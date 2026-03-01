@@ -7,6 +7,7 @@ import { createLogger } from 'redux-logger';
 import persistState, {mergePersistedState} from 'redux-localstorage'
 import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
+import { buildBundledState } from './lib/bundled-settings'
 
 export const LOCALSTORAGE_KEY = 'LaserWeb';
 export const DEBUG_KEY = "LaserwebDebug";
@@ -18,6 +19,7 @@ const hot = (state, action) => {
 const reducer = compose(
     mergePersistedState((initialState, persistedState) => {
         let state = { ...initialState, ...persistedState };
+        state = buildBundledState(state, { applySettings: (!persistedState || !persistedState.settings), resetProfiles: false });
         state.camera = require('./reducers/camera').resetCamera(null, state.settings);
         return hot(state, { type: 'LOADED' });
     })

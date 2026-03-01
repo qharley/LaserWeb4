@@ -1,6 +1,6 @@
 import { undoCombineReducers, shouldSaveUndo } from './undo'
 
-import { camera, zoomArea } from './camera'
+import { camera, zoomArea, resetCamera } from './camera'
 import { documents, documentsLoad } from './document'
 import { gcode } from './gcode'
 import { operations, currentOperation, operationsAddDocuments, fixupOperations } from './operation'
@@ -15,6 +15,7 @@ import { com } from './com'
 
 import omit from 'object.omit';
 import { deepMerge } from '../lib/helpers'
+import { buildBundledState } from '../lib/bundled-settings'
 
 const combined = undoCombineReducers({ camera, documents, operations, currentOperation, gcode, panes, settings, splitters, workspace, machineProfiles, materialDatabase, com }, {}, shouldSaveUndo);
 
@@ -36,6 +37,9 @@ export default function reducer(state, action) {
                 newState = Object.assign(newState, { gcode: { ...state.gcode, dirty: true } });
                 newState = Object.assign({}, state, deepMerge(action.getState(), newState));
             return reducer(newState, { type: 'LOADED', payload: newState });
+        case 'FACTORY_RESET_BUNDLED':
+            state = buildBundledState(state, { applySettings: true, resetProfiles: true });
+            return { ...state, camera: resetCamera(null, state.settings), gcode: { ...state.gcode, dirty: true } };
         default:
             return combined(state, action);
     }

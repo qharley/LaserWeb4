@@ -1,0 +1,156 @@
+{
+  "machineProfiles": {
+    "Ruijie-GRBL": {
+      "machineLabel": "Ruijie GRBL",
+      "settings": {
+        "__version": "4.0.733",
+        "__selectedProfile": "Ruijie-Smoothie",
+        "showMachine": true,
+        "machineWidth": 625,
+        "machineHeight": 430,
+        "machineBeamDiameter": 0.1,
+        "machineBottomLeftX": 0,
+        "machineBottomLeftY": 0,
+        "machineFeedRange": {
+          "XY": {"min": 1, "max": 50000},
+          "Z": {"min": 1, "max": 50000},
+          "A": {"min": 1, "max": 50000},
+          "S": {"min": 0, "max": 30000}
+        },
+        "machineXYProbeOffset": 0,
+        "machineZEnabled": true,
+        "machineZMatThickness": 0,
+        "machineZToolOffset": 0,
+        "machineZStartHeight": "10",
+        "machineZProbeOffset": 0,
+        "machineAEnabled": false,
+        "machineBlowerEnabled": true,
+        "machineBlowerGcodeOn": "M7",
+        "machineBlowerGcodeOff": "M9",
+        "pxPerInch": 91,
+        "forcePxPerInch": false,
+        "dpiBitmap": 600,
+        "toolGridWidth": 600,
+        "toolGridHeight": 400,
+        "toolGridMinorSpacing": 10,
+        "toolGridMajorSpacing": 50,
+        "toolSafetyLockDisabled": false,
+        "toolCncMode": false,
+        "toolImagePosition": "BL",
+        "toolUseNumpad": false,
+        "toolDisplayCache": false,
+        "toolUseGamepad": false,
+        "toolCreateEmptyOps": false,
+        "toolVideoDevice": null,
+        "toolVideoPerspective": {"enabled": false},
+        "toolVideoLens": {"a": 1, "b": 1, "F": 1, "scale": 1},
+        "toolVideoFov": {"x": 1, "y": 1},
+        "toolVideoResolution": "720p(HD)",
+        "toolVideoOMR": false,
+        "toolVideoOMROffsetX": 0,
+        "toolVideoOMROffsetY": 0,
+        "toolVideoOMRMarkerSize": 20,
+        "toolWebcamUrl": "",
+        "toolFeedUnits": "mm/min",
+        "toolTestSValue": 1,
+        "toolTestDuration": 0,
+        "gcodeStart": "G21         ; Set units to mm\r\nG90         ; Absolute positioning\r\n",
+        "gcodeEnd": "M2          ; End\r\n",
+        "gcodeHoming": "G28",
+        "gcodeToolOn": "M3",
+        "gcodeToolOff": "M5",
+        "gcodeLaserIntensity": "S",
+        "gcodeLaserIntensitySeparateLine": false,
+        "gcodeSMinValue": 0,
+        "gcodeSMaxValue": 1,
+        "gcodeCheckSizePower": 0,
+        "gcodeToolTestPower": 50,
+        "gcodeToolTestDuration": 10000,
+        "gcodeConcurrency": 2,
+        "comServerVersion": "4.0.113",
+        "comServerIP": "192.168.13.20:8000",
+        "comServerConnect": false,
+        "comInterfaces": ["USB", "ESP8266", "Telnet"],
+        "comPorts": ["/dev/ttyACM0", "/dev/ttyAMA0"],
+        "comAccumulatedJobTime": 3304,
+        "connectVia": "USB",
+        "connectPort": "/dev/ttyACM0",
+        "connectBaud": "115200",
+        "connectIP": "",
+        "jogStepsize": 10,
+        "jogFeedXY": 10000,
+        "jogFeedZ": 300,
+        "macros": {
+          "*GotoXY0": {
+            "label": "Goto XY zero",
+            "gcode": "G0 X0Y0 F5000",
+            "keybinding": "ctrl+f1",
+            "_locked": false
+          },
+          "*LaserOff": {
+            "label": "LASER OFF",
+            "gcode": "M5",
+            "keybinding": "ctrl+f2",
+            "_locked": false
+          },
+          "1a134da3-1a09-400e-afe2-fb67f6d9c651": {
+            "keybinding": "ctrl+f3",
+            "label": "Set XY zero",
+            "gcode": "G92 X0 Y0"
+          },
+          "20e7795f-1c14-45ec-a5ce-e51b4a1990c8": {
+            "keybinding": "ctrl+f4",
+            "label": "reset XY zero",
+            "gcode": "G92.1"
+          },
+          "956a3f0a-d049-456f-ab7e-e49f3b0e76f8": {
+            "keybinding": "",
+            "label": "Burn Me",
+            "gcode": "G91 G1 Z0.1 S1 F1000 G1 Z-0.1 G90"
+          },
+          "3dcb307d-c49f-4174-a336-79125406644f": {
+            "keybinding": "ctrl+shift+L",
+            "label": "Light On",
+            "gcode": "M42"
+          },
+          "a4204c3e-d0f9-42d5-8b6f-26331e13d5e4": {
+            "keybinding": "ctrl+shift+K",
+            "label": "Light Off",
+            "gcode": "M43"
+          },
+          "051b7150-c292-4d79-be01-43afbd569780": {
+            "keybinding": "",
+            "label": "Cal P1",
+            "gcode": "G0 X10 Y200 Z5 F5000"
+          },
+          "aabf0feb-215e-4aa3-8959-d2f8f20aa6ae": {
+            "keybinding": "",
+            "label": "Cal P2",
+            "gcode": "G0 X590 Y10 Z5 F5000"
+          },
+          "b745e53a-2af9-4bdf-adb0-83bbfa090a1b": {
+            "keybinding": "",
+            "label": "Cal P3",
+            "gcode": "G0 X590 Y390 Z5 F5000"
+          },
+          "3266a115-118b-4a3b-b595-a82e2149d85b": {
+            "keybinding": "",
+            "label": "Cal P1a",
+            "gcode": "G0 X10 Y10 Z5 F5000"
+          },
+          "421c46d5-1a37-4139-a35c-89688c8c17ac": {
+            "keybinding": "",
+            "label": "Cal P1b",
+            "gcode": "G0 X10 Y390 Z5 F5000"
+          },
+          "253a6940-f246-42eb-857e-66e3ec6b1a87": {
+            "keybinding": "",
+            "label": "Mid",
+            "gcode": "G0 X300 Y200 Z8 F5000"
+          }
+        },
+        "uiFcDrag": null
+      }
+    }
+  }
+}
