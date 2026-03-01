@@ -9,6 +9,7 @@ import omit from 'object.omit';
 import Validator from 'validatorjs';
 
 import { setSettingsAttrs, uploadSettings, downloadSettings, uploadMachineProfiles, downloadMachineProfiles, uploadSnapshot, downloadSnapshot, storeSnapshot, recoverSnapshot } from '../actions/settings';
+import { LOCALSTORAGE_KEY } from '../lib/constants';
 import { SETTINGS_VALIDATION_RULES, ValidateSettings } from '../reducers/settings';
 
 import MachineProfile from './machine-profiles';
@@ -389,10 +390,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleFactoryReset: () => {
-            confirm("Reset settings and machine profiles to bundled defaults?", (data) => {
+            confirm("Reset settings and machine profiles to bundled defaults? The page will reload.", (data) => {
                 if (data) {
-                    dispatch({ type: 'FACTORY_RESET_BUNDLED' })
-                    alert('Bundled defaults applied successfully.')
+                    window.localStorage.removeItem(LOCALSTORAGE_KEY);
+                    window.location.reload();
                 }
             })
         },

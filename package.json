@@ -17,6 +17,7 @@
     "sync-frontend": "rm -rf node_modules/lw.comm-server/app/* && cp -r dist/. node_modules/lw.comm-server/app/",
     "build-sync": "npm run bundle-dev && npm run sync-frontend",
     "build-sync-restart": "npm run build-sync && (pkill -f 'node_modules/lw.comm-server/server.js' || true); npm run start-server",
+    "deploy-pi": "npm run build-sync && rsync -avz --delete node_modules/lw.comm-server/app/ pi@192.168.42.222:~/LaserWeb4/node_modules/lw.comm-server/app/ && ssh pi@192.168.42.222 'sudo systemctl restart laserweb || pkill -f server.js || true'",
     "build-docs": "jsdoc -c ./jsdoc.json",
     "setup:trixie": "git submodule update --init --recursive && npm install",
     "installdev": "git submodule init && git submodule update --remote && npm install && npm update lw.comm-server",

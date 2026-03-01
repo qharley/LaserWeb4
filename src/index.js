@@ -8,9 +8,9 @@ import persistState, {mergePersistedState} from 'redux-localstorage'
 import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
 import { buildBundledState } from './lib/bundled-settings'
+import { LOCALSTORAGE_KEY, DEBUG_KEY } from './lib/constants'
 
-export const LOCALSTORAGE_KEY = 'LaserWeb';
-export const DEBUG_KEY = "LaserwebDebug";
+export { LOCALSTORAGE_KEY, DEBUG_KEY };
 
 const hot = (state, action) => {
     return require('./reducers').default(state, action);
