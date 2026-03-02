@@ -65,7 +65,7 @@
     "gcodeToolTestDuration": 500,
     "gcodeConcurrency": 2,
     "comServerVersion": "4.0.127",
-    "comServerIP": "192.168.13.110:8000",
+    "comServerIP": "192.168.13.20:8000",
     "comServerConnect": false,
     "comInterfaces": ["USB", "ESP8266", "Telnet"],
     "comPorts": ["/dev/ttyACM0", "/dev/ttyAMA0"],

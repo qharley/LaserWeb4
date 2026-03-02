@@ -60,6 +60,46 @@ npm run bundle-dev
 npm start
 ```
 
+#### Running as a systemd service on Raspberry Pi
+
+The `install-service.sh` script automates the full setup so LaserWeb4 starts automatically on boot.
+
+```sh
+chmod +x install-service.sh
+./install-service.sh
+```
+
+This will:
+- Verify / install Node.js 20 (via NodeSource if needed)
+- Install native build prerequisites
+- Initialise git submodules
+- Run `npm install` and build the frontend bundle
+- Add your user to the `dialout` group (serial/USB access)
+- Create and enable `/etc/systemd/system/laserweb.service`
+- Open port 8000 in `ufw` if the firewall is active
+- Start the service immediately
+
+Once installed, the server is available at `http://<pi-ip>:8000`.
+
+**Options:**
+
+| Option | Description |
+|---|---|
+| `--port PORT` | Use a different port (default: `8000`) |
+| `--user USER` | Run service as a specific user (default: current user) |
+| `--install-dir DIR` | Path to the LaserWeb4 directory (default: script directory) |
+| `--no-build` | Skip `npm install` / webpack steps (use if already built) |
+| `--uninstall` | Stop and remove the service |
+
+**Service management:**
+
+```sh
+sudo systemctl status  laserweb   # check status
+sudo systemctl restart laserweb   # restart
+sudo systemctl stop    laserweb   # stop
+journalctl -u laserweb -f         # follow logs
+```
+
 #### Notes for Node 20 migration
 
 - This repository includes git dependencies (`lw.comm-server`, `web-cam-cpp`, etc.).
